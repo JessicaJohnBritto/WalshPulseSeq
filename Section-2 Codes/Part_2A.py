@@ -54,7 +54,22 @@ def initialVals(params, **kwargs):
     psi0 = np.random.randn(2**N)
     psi_nm = normalizeWF(psi0)
     return n, N, r, op, pulses, psi_nm, R, alpha
-# n, N, r, op, pulses, psi_nm, R, alpha = initialVals(params)
+params = {
+'N' : 1,
+'tau_list':[1, 0.5, 0.1, 0.05],
+'tau': 0.1,
+'n': 2,
+'alpha': 1,
+'T': 10,
+'R':[],
+'r':[],
+'psi_nm':[],
+'opH': [X, Y], # Need to change this specific to Model
+'pulses': [I, Z] # Need to change this specific to Model
+}
+
+n, N, r, op, pulses, psi_nm, R, alpha = initialVals(params)
+# print(R)
 
 
 def TogglingFrameH(params, **kwargs):
