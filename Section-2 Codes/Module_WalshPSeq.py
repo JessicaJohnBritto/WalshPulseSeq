@@ -24,7 +24,14 @@ Y = np.array([[0, -1j], [1j, 0]])
 I = np.array([[1, 0], [0, 1]])
 H = np.array([[1, 1], [1, -1]])
 
-def WF_Conditions(tupleprdt, **kwargs): # tupleprdt is a list
+
+def WF_Conditions(tupleprdt, **kwargs): 
+    """
+    *args: tupleprdt is a list of tuple of 
+    signs of wxi and wyi. 
+    Returns: tupleprdt - a list of Pauli Ops
+    depending on eq 8 from the paper
+    """
     for i, tprdt in enumerate(tupleprdt):
         if tprdt[0] == tprdt[1] == 1:
             tupleprdt[i] = I
@@ -35,65 +42,90 @@ def WF_Conditions(tupleprdt, **kwargs): # tupleprdt is a list
         elif tprdt[0] == tprdt[1] == -1:
             tupleprdt[i] = Z
     return tupleprdt   
-# print(WF_Conditions(tupleprdt = [(1,1), (1,-1)]))
 
 def WF_Generate(params, **kwargs):
-    N, lst, W_x, W_y, tupleprdt, q, lst = params['N'], [H], kwargs['W_x'], kwargs['W_y'], [], 0, []
-    H0, H1 = np.array([1]), H 
-    q = int(np.ceil(np.log2(max(W_x, W_y)+1)))
+    """
+    **kwargs: W_x, W_y: Required - list of one element 
+    consisting the index of x, y part of one
+    qubit. q: Optional - gives the number of times H has
+    to tensor product with itself. Useful to form WF based
+    on the highest index of decoupling lists of Wx, Wy.
+    Returns: lstPaulOp - a list of Pauli Ops
+    based on the W.I associated with that qubit.
+    """
+    wx, wy, lst, q, signTuple, lstPaulOp = kwargs['wx'], kwargs['wy'], [], 0, [], []
+    H0, H1 = np.eye(1), H
+    if 'q' in kwargs:
+        q = kwargs['q']
+    else:
+        q = int(np.ceil(np.log2(max(wx, wy)+1)))
     if q == 0:
         lst = [H0]
-        tupleprdt.append((1, 1)) # Since if the max(wx, wy) is 0, then both are zero.
     else:
         lst = [H1]
         for i in range(q-1):
-            lst.append(lst[i])
+            lst += [H1]
     Hf = reduce(np.kron, lst)
-    w_x, w_y = Hf[W_x-1], Hf[W_y-1]
-    Hf = reduce(np.kron, lst)
-    wfx, wfy = Hf[W_x], Hf[W_y]
-    for i, h in enumerate(wfx):
-        tupleprdt.append((h, wfy[i]))
-    tupleprdt = WF_Conditions(tupleprdt)
-    return tupleprdt
-# print(WF_Generate(params, W_x = 3, W_y = 3))
-    
+    wfx, wfy = Hf[wx], Hf[wy]
+    for i, wfx_k in enumerate(wfx):
+        signTuple += [(wfx_k, wfy[i])]
+    lstPaulOp = WF_Conditions(signTuple)
+    return lstPaulOp
+
 def WF_WIList(params, **kwargs):
-    W_x, W_y, tupleprdt, ps, Pseq = kwargs['W_x'], kwargs['W_y'], [], [], []
-    for i, w_x in enumerate(W_x):
-        tupleprdt.append(WF_Generate(params, W_x = w_x, W_y = W_y[i]))
-    ps = [[] for _ in range(len(max(tupleprdt,key=len)))]
-    padded_tupleprdt = list(zip(*itertools.zip_longest(*tupleprdt, fillvalue=I)))
-    for i, p in enumerate(ps):
-        for j, padded_ps in enumerate(padded_tupleprdt):
-            ps[i].append(padded_ps[i])
-    for i, p in enumerate(ps):
-        Pseq += [reduce(np.kron, p)]
+    """
+    **kwargs: Wx, Wy - list consisting the 
+    index of x, y part of each qubit.
+    Returns: Pseq - Pulse sequence.
+    """
+    Wx, Wy, lstPaulOp, Pseq = kwargs['Wx'], kwargs['Wy'], [], []
+    q = int(np.ceil(np.log2(max(max(Wx, Wy))+1)))
+    for i, wx in enumerate(Wx):
+        lstPaulOp += [WF_Generate(params, wx = wx, wy = Wy[i], q = q)]
+    padded_lstPaulOp = list(zip(*itertools.zip_longest(*lstPaulOp, fillvalue=I)))
+    pseq_k = [[] for _ in range(len(padded_lstPaulOp[0]))]
+    for i, ps_k in enumerate(pseq_k):
+        for j, paulop in enumerate(padded_lstPaulOp):
+            pseq_k[i] += [paulop[i]]
+    for i, ps_k in enumerate(pseq_k):
+        Pseq += [reduce(np.kron, ps_k)]
     return Pseq
-# print(len(WF_WIList(params, W_x = [1, 2, 3], W_y =  [1, 2, 3])))
-# print(WF_WIList(params, W_x = [1, 2, 3], W_y = [1, 2, 3]))
+
 
 def WPSresource_Hamiltonian_TimeEvolOp_IsingType(params, **kwargs):
-    N, H_r, unitary_timeOp, opH = params['N'], np.zeros((2**params['N'], 2**params['N']), dtype = complex), 0, params['opH']
-    R, r, alpha, lst = params['R'], params['r'], params['alpha'], [I for _ in range(N)]
+    """
+    Returns: Resource Hamiltonian (Hr) and 
+    its time evolution for τ time.
+    """
+    N, opH, unitary_timeOp = params['N'], params['opH'], 0
+    H_r, R, r, alpha = np.zeros((2**N, 2**N), dtype = complex), params['R'], params['r'], params['alpha']
+    lst = [I for _ in range(N)]
     for op in opH:
         for i in range(N):
             for j in range(i+1, N, 1):
                 lst[i] = op
                 lst[j] = op
-                H_r += R[i]*reduce(np.kron, lst)/(np.power(np.abs(i-j), alpha))
+                H_r += (np.abs(R[i]-R[j]))*reduce(np.kron, lst)/(np.power(np.abs(i-j), alpha))
                 lst = [I for _ in range(N)]
     tau = params['tau']
-    unitary_timeOp = expm(-1j*tau/(params['n'])*H_r)
+    unitary_timeOp = expm(-1j*tau*H_r/(params['n']))
     return H_r, unitary_timeOp
 
 def WPSeq_TimeEvolOp(params, **kwargs):
+    """
+    To input any Hamiltonian other than XY, use 'Hr' in kwargs.
+    **kwargs: Hr Optional
+    Returns: Unitary time evolution operator as per eq1
+    and time interval based on τ step.
+    """
     Pseq, unitary_timeOp, timeOpPHrP = params['pulses'], [], np.eye(2**(params['N']))
-    params['n'], tau_n_list = len(Pseq), []
-#     print(params['tau'])
-    Hr, expH_r = WPSresource_Hamiltonian_TimeEvolOp_IsingType(params)
-    for k, p in enumerate(Pseq):
-        timeOpPHrP = np.linalg.inv(p)@expH_r@p@timeOpPHrP
+    if 'Hr' in kwargs:
+        Hr = kwargs['Hr']
+        expHr = expm(-1j*params['tau']*Hr/(params['n']))
+    else:
+        Hr, expHr = WPSresource_Hamiltonian_TimeEvolOp_IsingType(params)
+    for i, p in enumerate(Pseq):
+        timeOpPHrP = np.linalg.inv(p) @ expHr @ p @ timeOpPHrP
     t_list = np.arange(0, params['T'], params['tau'])
     unitary_timeOp = [np.linalg.matrix_power(timeOpPHrP, i) for i, t in enumerate(t_list)]
     return unitary_timeOp, t_list
