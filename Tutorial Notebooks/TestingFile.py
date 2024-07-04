@@ -5,8 +5,8 @@ Created on Thu Jun  6 13:46:14 2024
 @author: Jessica
 """
 
-from Module_WalshPSeq import *
-from Part_2A import normalizeWF, initialVals
+from Section_2.Module_WalshPSeq import *
+from Section_2.Part_2A import normalizeWF, initialVals
 # import matplotlib.pyplot as plt
 
 # params = {

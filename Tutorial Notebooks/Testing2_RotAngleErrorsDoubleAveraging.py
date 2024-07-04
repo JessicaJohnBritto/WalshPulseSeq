@@ -4,9 +4,9 @@ Created on Mon Jun 10 14:11:15 2024
 
 @author: Jessica
 """
-from Part_2A import normalizeWF, initialVals
-from Module_RotationAngleErrorsDoubleAveraging import *
-from Module_WalshPSeq import WF_WIList
+from Section_2.Part_2A import normalizeWF, initialVals
+from Section_3.Module_RotationAngleErrorsDoubleAveraging import *
+from Section_2.Module_WalshPSeq import WF_WIList
 
 params = {
 'N' : 1,
