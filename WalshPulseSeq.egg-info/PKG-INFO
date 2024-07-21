@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: WalshPulseSeq
+Version: 0.1
+Summary: A package for Implementing Walsh Pulse Sequenece based on XY Hamiltonian
+Author: JessicaJohnBritto
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Requires-Dist: numpy==2.0.0
+Requires-Dist: scikit_learn==1.5.1
+Requires-Dist: scipy==1.8.0
+Requires-Dist: setuptools==56.0.0
+Requires-Dist: matplotlib==3.5.2

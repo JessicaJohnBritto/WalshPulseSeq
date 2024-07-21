@@ -1,0 +1,16 @@
+setup.py
+Section_2/InitialFunctions.py
+Section_2/Module_WalshPSeq.py
+Section_2/Part_2A.py
+Section_2/TestingFile.py
+Section_2/__init__.py
+Section_3/Module_RotationAngleErrorsDoubleAveraging.py
+Section_3/__init__.py
+Tutorial Notebooks/Testing2_RotAngleErrorsDoubleAveraging.py
+Tutorial Notebooks/TestingFile.py
+Tutorial Notebooks/__init__.py
+WalshPulseSeq.egg-info/PKG-INFO
+WalshPulseSeq.egg-info/SOURCES.txt
+WalshPulseSeq.egg-info/dependency_links.txt
+WalshPulseSeq.egg-info/requires.txt
+WalshPulseSeq.egg-info/top_level.txt
