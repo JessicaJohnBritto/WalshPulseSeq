@@ -1,0 +1,39 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: WalshPulseSeq
+message: >-
+  If you use this software or any part of code, please cite
+  it using the metadata from this file.
+type: software
+authors:
+  - name-particle: Jessica
+    family-names: John Britto
+    email: jessjohnbritto@gmail.com
+    affiliation: 'Indian Institute of Technology, Kharagpur'
+    orcid: 'https://orcid.org/0009-0008-0140-9306'
+  - name: 'LPMMC, CNRS-UGA'
+    address: Av. des Martyrs
+    city: GRENOBLE
+    post-code: '38000'
+    country: FR
+    website: 'https://lpmmc.cnrs.fr/?lang=fr'
+repository-code: 'https://github.com/JessicaJohnBritto/WalshPulseSeq'
+abstract: >+
+  This software is developed based on Votto, M., Zeiher, J.,
+  & Vermersch, B. (2023). Robust universal quantum
+  processors in spin systems via Walsh pulse sequences.
+  arXiv preprint arXiv:2311.10600. The aim to develop tools
+  to simulate the Dynamical Decoupling protocol for Spin
+  Systems using Walsh Functions. Tutorial notebooks on how
+  to use this software are provided with relevant examples
+  and explanations. 
+
+keywords:
+  - Walsh Functions
+  - Quantum Many Body Theory
+  - Dynamical Decoupling
+  - Hamiltonian Engineering
+  - Quantum Information Science
+license: Apache-2.0
