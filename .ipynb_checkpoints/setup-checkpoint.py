@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+# from setuptools import setup, find_packages
 
 # def parse_requirements(filename):
 #     with open(filename, 'r') as file:
@@ -24,7 +24,8 @@ from setuptools import setup, find_packages
 setup(
     name='WPSProtocol',
     version='0.1.0',
-    packages=find_packages(include=['src', 'src.*']),
+    packages=find_packages(where='src'),
+    package_dir={'': 'src'},
     install_requires=[
         'numpy==1.24.3',
         'matplotlib==3.2.2',
