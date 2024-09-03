@@ -37,5 +37,5 @@ setup(
         'Operating System :: OS Independent',
     ],
     python_requires='==3.8.19',
-    description='A package for Implementing Walsh Pulse Sequenece based on XY Hamiltonian',
+    description='A package for Implementing Walsh Pulse Sequenece constructed out of XY Hamiltonian based on Votto, M., Zeiher, J., & Vermersch, B. (2023). Robust universal quantum processors in spin systems via Walsh pulse sequences. arXiv preprint arXiv:2311.10600.',
 )
