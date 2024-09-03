@@ -1,3 +1,22 @@
 [build-system]
 requires = ["setuptools==69.5.1"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "WPSProtocol"
+version = "0.1.0"
+authors = [
+  { name="Jessica John Britto", email="jessicajohnbritto@kgpian.iitkgp.ac.in" },
+]
+description = ""
+readme = "README.md"
+requires-python = "==3.8.19"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/JessicaJohnBritto/WalshPulseSeq/tree/main"
+Issues = "https://github.com/JessicaJohnBritto/WalshPulseSeq/issues"
