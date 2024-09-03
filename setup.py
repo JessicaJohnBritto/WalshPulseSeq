@@ -22,15 +22,20 @@ from setuptools import setup, find_packages
 
 from setuptools import setup, find_packages
 setup(
-    name='example',
+    name='WPSProtocol',
     version='0.1.0',
     packages=find_packages(include=['src', 'src.*']),
     install_requires=[
-        'PyYAML',
-        'pandas==0.23.3',
-        'numpy>=1.14.5',
-        'matplotlib>=2.2.0,,
-        'jupyter'
-    ]
-
+        'numpy==1.24.3',
+        'matplotlib==3.2.2',
+        'scipy==1.10.1',
+    ],
+    author='Jessica John Britto',
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+    ],
+    python_requires='==3.8.19',
+    description='A package for Implementing Walsh Pulse Sequenece based on XY Hamiltonian',
 )
