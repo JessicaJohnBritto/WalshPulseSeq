@@ -5,17 +5,19 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements_for_pip.txt"]}
 
-[tool.setuptools-git-versioning]
-enabled = true
+# [tool.setuptools-git-versioning]
+# enabled = true
 
-[tool.setuptools_scm]
-version_scheme = "post-release"
-local_scheme = "no-local-version"
+# [tool.setuptools_scm]
+# version_scheme = "release-branch-semver"
+# local_scheme = "no-local-version"
 
 [project]
 name = "WPSProtocol"
 readme = "README.md"
-dynamic = ["version", "dependencies"]
+version = "0.1.2"
+dynamic = ["dependencies"]
+# dynamic = ["version", "dependencies"]
 
 requires-python = "==3.8.19"
 authors = [
