@@ -13,12 +13,6 @@ authors:
     email: jessjohnbritto@gmail.com
     affiliation: 'Indian Institute of Technology, Kharagpur'
     orcid: 'https://orcid.org/0009-0008-0140-9306'
-  - name: 'LPMMC, CNRS-UGA'
-    address: Av. des Martyrs
-    city: GRENOBLE
-    post-code: '38000'
-    country: FR
-    website: 'https://lpmmc.cnrs.fr/?lang=fr'
 repository-code: 'https://github.com/JessicaJohnBritto/WalshPulseSeq'
 abstract: >+
   This software is developed based on Votto, M., Zeiher, J.,
