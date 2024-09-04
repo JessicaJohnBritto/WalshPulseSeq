@@ -1,0 +1,59 @@
+CITATION.cff
+LICENSE
+README.md
+pyproject.toml
+requirements_conda.txt
+requirements_for_pip.txt
+requirements_for_pip1.txt
+setup.py
+.ipynb_checkpoints/pyproject-checkpoint.toml
+.ipynb_checkpoints/requirements_for_pip-checkpoint.txt
+.ipynb_checkpoints/requirements_for_pip1-checkpoint.txt
+.ipynb_checkpoints/setup-checkpoint.cfg
+.ipynb_checkpoints/setup-checkpoint.py
+Initial_Codes/.ipynb_checkpoints/DoubleAvgRotError-checkpoint.ipynb
+Initial_Codes/.ipynb_checkpoints/QuTip Assignment-InternshipUGA-checkpoint.ipynb
+Initial_Codes/.ipynb_checkpoints/QuTip Assignment-InternshipUGA1-checkpoint.ipynb
+Initial_Codes/.ipynb_checkpoints/Section3_FPS_And_RotAngleErr-checkpoint.ipynb
+Initial_Codes/.ipynb_checkpoints/Section_3_Final-2-Copy1-checkpoint.ipynb
+Initial_Codes/.ipynb_checkpoints/Section_3_Final-2-checkpoint.ipynb
+Initial_Codes/.ipynb_checkpoints/Section_3_Final-checkpoint.ipynb
+Initial_Codes/Primordial_Codes/Code for Section-2_Using Numpy and Scipy.ipynb
+Initial_Codes/Primordial_Codes/QuTip Assignment-InternshipUGA.ipynb
+Initial_Codes/Primordial_Codes/QuTip Assignment-InternshipUGA1.ipynb
+Initial_Codes/Quantum_Simulations/Expectation_ValsCorrelation_FromEvolvedState-Copy1.ipynb
+Initial_Codes/Quantum_Simulations/Untitled.ipynb
+Initial_Codes/Section_3/DoubleAvgRotError.ipynb
+Initial_Codes/Section_3/Section3_FPS_And_RotAngleErr.ipynb
+Initial_Codes/Section_3/Section_3_Final-2-Copy1.ipynb
+Initial_Codes/Section_3/Section_3_Final-2.ipynb
+Initial_Codes/Section_3/Section_3_Final.ipynb
+Quantum_Simulations/Expectation_ValsCorrelation_FromEvolvedState.ipynb
+Tutorial Notebooks/SS+S_NN.ipynb
+Tutorial Notebooks/WalshPSeq_XX+YY_LongRangeInteractions.ipynb
+Tutorial Notebooks/readme.md
+Tutorial Notebooks/.ipynb_checkpoints/SS+S_NN-checkpoint.ipynb
+Tutorial Notebooks/.ipynb_checkpoints/Testing_SS+S_NN-InteractionsType-checkpoint.ipynb
+Tutorial Notebooks/.ipynb_checkpoints/Testing_WalshPSeq_XX+YY_LongRangeInteractionsType-checkpoint.ipynb
+Tutorial Notebooks/.ipynb_checkpoints/WalshPSeq_XX+YY_LongRangeInteractions-checkpoint.ipynb
+Tutorial Notebooks/Testing_Files/SS+S_NN.ipynb
+Tutorial Notebooks/Testing_Files/Testing2_RotAngleErrorsDoubleAveraging.py
+Tutorial Notebooks/Testing_Files/TestingFile.py
+Tutorial Notebooks/Testing_Files/WalshPSeq_XX+YY_LongRangeInteractions.ipynb
+Tutorial Notebooks/Testing_Files/.ipynb_checkpoints/SS+S_NN-checkpoint.ipynb
+Tutorial Notebooks/Testing_Files/.ipynb_checkpoints/WalshPSeq_XX+YY_LongRangeInteractions-checkpoint.ipynb
+src/WPSProtocol/InitialFunctions.py
+src/WPSProtocol/Module_RotationAngleErrorsDoubleAveraging.py
+src/WPSProtocol/Module_WalshPSeq.py
+src/WPSProtocol/Part_2A.py
+src/WPSProtocol/TestingFile.py
+src/WPSProtocol/__init__.py
+src/WPSProtocol.egg-info/PKG-INFO
+src/WPSProtocol.egg-info/SOURCES.txt
+src/WPSProtocol.egg-info/dependency_links.txt
+src/WPSProtocol.egg-info/requires.txt
+src/WPSProtocol.egg-info/top_level.txt
+src/WPSProtocol/__pycache__/InitialFunctions.cpython-38.pyc
+src/WPSProtocol/__pycache__/Module_WalshPSeq.cpython-38.pyc
+src/WPSProtocol/__pycache__/Part_2A.cpython-38.pyc
+src/WPSProtocol/__pycache__/__init__.cpython-38.pyc

@@ -15,7 +15,7 @@ dependencies = {file = ["requirements_for_pip.txt"]}
 [project]
 name = "WPSProtocol"
 readme = "README.md"
-version = "0.1.2"
+version = "0.1.3"
 dynamic = ["dependencies"]
 # dynamic = ["version", "dependencies"]
 
