@@ -3,7 +3,7 @@ requires = ["setuptools==69.5.1", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.dynamic]
-dependencies = {file = ["requirements_for_pip.txt"]}
+dependencies = {file = ["requirements_for_pip1.txt"]}
 
 [tool.setuptools-git-versioning]
 enabled = true
