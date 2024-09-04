@@ -4,6 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "WPSProtocol"
+readme = "README.md"
 version = "0.1.0"
 authors = [
   { name="Jessica John Britto", email="jessicajohnbritto@kgpian.iitkgp.ac.in" },
