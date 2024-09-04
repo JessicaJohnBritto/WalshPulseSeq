@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools==69.5.1"]
+requires = ["setuptools==69.5.1", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.dynamic]

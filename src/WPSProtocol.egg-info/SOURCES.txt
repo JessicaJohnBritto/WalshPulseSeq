@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+requirements_for_pip.txt
+src/WPSProtocol/InitialFunctions.py
+src/WPSProtocol/Module_RotationAngleErrorsDoubleAveraging.py
+src/WPSProtocol/Module_WalshPSeq.py
+src/WPSProtocol/Part_2A.py
+src/WPSProtocol/TestingFile.py
+src/WPSProtocol/__init__.py
+src/WPSProtocol.egg-info/PKG-INFO
+src/WPSProtocol.egg-info/SOURCES.txt
+src/WPSProtocol.egg-info/dependency_links.txt
+src/WPSProtocol.egg-info/requires.txt
+src/WPSProtocol.egg-info/top_level.txt
