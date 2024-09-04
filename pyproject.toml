@@ -2,17 +2,6 @@
 requires = ["setuptools==69.5.1", "setuptools_scm[toml]>=6.0"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements_for_pip.txt"]}
-
-[tool.setuptools-git-versioning]
-enabled = true
-
-[tool.setuptools_scm]
-# version_scheme = "post-release"  # Optional: how to generate the version number
-local_scheme = "node-and-timestamp"  # Optional: how to generate the local version number
-version_scheme = "release-branch-semver"
-# local_scheme = "no-local-version"
 
 [project]
 name = "WPSProtocol"
@@ -35,3 +24,15 @@ classifiers = [
 [project.urls]
 Homepage = "https://github.com/JessicaJohnBritto/WalshPulseSeq/tree/main"
 Issues = "https://github.com/JessicaJohnBritto/WalshPulseSeq/issues"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements_for_pip.txt"]}
+
+# [tool.setuptools-git-versioning]
+# enabled = true
+
+[tool.setuptools_scm]
+# version_scheme = "post-release"  # Optional: how to generate the version number
+# local_scheme = "node-and-timestamp"  # Optional: how to generate the local version number
+# version_scheme = "release-branch-semver"
+# local_scheme = "no-local-version"
