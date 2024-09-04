@@ -9,9 +9,9 @@ dependencies = {file = ["requirements_for_pip.txt"]}
 enabled = true
 
 [tool.setuptools_scm]
-version_scheme = "post-release"  # Optional: how to generate the version number
+# version_scheme = "post-release"  # Optional: how to generate the version number
 local_scheme = "node-and-timestamp"  # Optional: how to generate the local version number
-# version_scheme = "release-branch-semver"
+version_scheme = "release-branch-semver"
 # local_scheme = "no-local-version"
 
 [project]
