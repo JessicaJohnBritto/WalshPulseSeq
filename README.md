@@ -1,5 +1,5 @@
 
-# WPSProtocol
+# WPSProtocol (WPS == Walsh Pulse Sequence)
 
 This is developed as part of my 2024 summer internship at LPMMC, UGA-CNRS, Grenoble, France in Prof. Benoît Vermersch's research group.
 
