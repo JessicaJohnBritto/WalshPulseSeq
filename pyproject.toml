@@ -2,10 +2,18 @@
 requires = ["setuptools==69.5.1"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements_for_pip.txt"]}
+
+[tool.setuptools-git-versioning]
+enabled = true
+
 [project]
 name = "WPSProtocol"
 readme = "README.md"
-version = "0.1.1"
+dynamic = ["dependencies", "version"]
+
+# version = "0.1.1"
 requires-python = "==3.8.19"
 authors = [
   { name="Jessica John Britto", email="jessicajohnbritto@kgpian.iitkgp.ac.in" },
@@ -16,11 +24,11 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = [
-    'numpy==1.24.3',
-    'matplotlib==3.2.2',
-    'scipy==1.10.1',
-]
+# dependencies = [
+#     'numpy==1.24.3',
+#     'matplotlib==3.2.2',
+#     'scipy==1.10.1',
+# ]
 
 [project.urls]
 Homepage = "https://github.com/JessicaJohnBritto/WalshPulseSeq/tree/main"
