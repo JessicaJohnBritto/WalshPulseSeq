@@ -3,7 +3,8 @@ LICENSE
 README.md
 pyproject.toml
 requirements_conda.txt
-requirements_for_pip.txt
+requirements_for_pip1.txt
+setup.py
 .ipynb_checkpoints/pyproject-checkpoint.toml
 .ipynb_checkpoints/requirements_for_pip-checkpoint.txt
 .ipynb_checkpoints/setup-checkpoint.cfg

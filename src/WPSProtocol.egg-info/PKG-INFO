@@ -1,7 +1,8 @@
 Metadata-Version: 2.1
 Name: WPSProtocol
-Version: 1.1.post3
+Version: 0.1.1
 Summary: A package for Implementing Walsh Pulse Sequenece constructed out of XY Hamiltonian based on Votto, M., Zeiher, J., & Vermersch, B. (2023). Robust universal quantum processors in spin systems via Walsh pulse sequences. arXiv preprint arXiv:2311.10600.
+Author: Jessica John Britto
 Author-email: Jessica John Britto <jessicajohnbritto@kgpian.iitkgp.ac.in>
 Project-URL: Homepage, https://github.com/JessicaJohnBritto/WalshPulseSeq/tree/main
 Project-URL: Issues, https://github.com/JessicaJohnBritto/WalshPulseSeq/issues
@@ -64,8 +65,8 @@ Requires-Dist: MarkupSafe==2.1.3
 Requires-Dist: matplotlib==3.2.2
 Requires-Dist: matplotlib-inline==0.1.6
 Requires-Dist: mistune==2.0.4
-Requires-Dist: mkl-fft==1.3.6
-Requires-Dist: mkl-random==1.2.4
+Requires-Dist: mkl-fft==1.3.1
+Requires-Dist: mkl-random==1.2.2
 Requires-Dist: mkl-service==2.4.0
 Requires-Dist: nbclient==0.8.0
 Requires-Dist: nbconvert==7.10.0
