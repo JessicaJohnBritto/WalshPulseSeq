@@ -8,6 +8,8 @@ dependencies = {file = ["requirements_for_pip.txt"]}
 [tool.setuptools-git-versioning]
 enabled = true
 
+[tool.setuptools_scm]
+
 [project]
 name = "WPSProtocol"
 readme = "README.md"
