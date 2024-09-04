@@ -1,6 +1,7 @@
 LICENSE
 README.md
 pyproject.toml
+requirements_for_pip.txt
 src/WPSProtocol/InitialFunctions.py
 src/WPSProtocol/Module_RotationAngleErrorsDoubleAveraging.py
 src/WPSProtocol/Module_WalshPSeq.py
