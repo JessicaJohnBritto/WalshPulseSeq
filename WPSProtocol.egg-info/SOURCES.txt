@@ -1,8 +1,0 @@
-LICENSE
-pyproject.toml
-setup.cfg
-setup.py
-WPSProtocol.egg-info/PKG-INFO
-WPSProtocol.egg-info/SOURCES.txt
-WPSProtocol.egg-info/dependency_links.txt
-WPSProtocol.egg-info/top_level.txt

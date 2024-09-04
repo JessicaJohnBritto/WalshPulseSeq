@@ -1,3 +1,0 @@
-Section_2
-Section_3
-Tutorial Notebooks

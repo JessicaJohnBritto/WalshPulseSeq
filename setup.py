@@ -32,6 +32,7 @@ setup(
         'scipy==1.10.1',
     ],
     author='Jessica John Britto',
+    readme = "README.md"
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
