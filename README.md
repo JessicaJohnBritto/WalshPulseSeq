@@ -1,11 +1,11 @@
 
 # WPSProtocol
 
-This is developed as part of my summer internship at LPMMC, UGA-CNRS, Grenoble, France. 
+This is developed as part of my 2024 summer internship at LPMMC, UGA-CNRS, Grenoble, France in Prof. Benoît Vermersch's research group.
 
-WPSProtocol makes use of Walsh Functions to generate Pulse Sequences for selective interactions among qubits based on the underlying XY Hamiltonian.
+WPSProtocol _(WPS == Walsh Pulse Sequence)_ makes use of Walsh Functions to generate Pulse Sequences for selective interactions among qubits based on the underlying XY Hamiltonian.
 
-WPSProtocol contains codes for implementing the protocol described in this paper Votto, M., Zeiher, J., & Vermersch, B. (2023). Robust universal quantum processors in spin systems via Walsh pulse sequences. arXiv preprint arXiv:2311.10600.
+WPSProtocol contains codes for implementing the protocol described in this paper _Votto, M., Zeiher, J., & Vermersch, B. (2023). Robust universal quantum processors in spin systems via Walsh pulse sequences. arXiv preprint arXiv:2311.10600._
 
 ## Installation
 
@@ -39,8 +39,8 @@ Clone the project
 
 To use it in development mode.
 
-Note: Be inside the directory where pyproject.toml is before running the following command. For eg - here WalshPulseSeq is the directory, therefore, the path variable should be ../WalshPulseSeq.
-```bash
+_Note: Be inside the directory where pyproject.toml is before running the following command. For eg - here WalshPulseSeq is the directory, therefore, the path variable should be ../WalshPulseSeq.
+_```bash
   python -m pip install -e .
 ```
 
