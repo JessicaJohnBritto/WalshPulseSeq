@@ -39,12 +39,12 @@ Clone the project
 
 To use it in development mode.
 
-_Note: Be inside the directory where pyproject.toml is before running the following command. For eg - here WalshPulseSeq is the directory, therefore, the path variable should be ../WalshPulseSeq_.
+_Note: Be inside the directory where pyproject.toml is before running the following command. For eg - here `WalshPulseSeq` is the directory, therefore, the path variable should be `../WalshPulseSeq`_.
 ```bash
   python -m pip install -e .
 ```
 
-To install the package using git, use the following commands.
+To install the package using git, use the following command.
 
 ```bash
   python -m pip install git+https://github.com/JessicaJohnBritto/WalshPulseSeq.git#egg=WPSProtocol
