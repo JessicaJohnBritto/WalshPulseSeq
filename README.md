@@ -41,6 +41,7 @@ Clone the project
 Follow the steps given in `Run Locally`. 
 
 By following the command below, you will be in the development mode.
+
 _Note: Be inside the directory where pyproject.toml is before running the following command. For eg - here `WalshPulseSeq` is the directory, therefore, the path variable should be `../WalshPulseSeq`_.
 ```bash
   python -m pip install -e .
