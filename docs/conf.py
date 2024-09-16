@@ -10,6 +10,7 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+
 import os
 import sys
 import subprocess
@@ -19,9 +20,9 @@ import subprocess
 
 # -- Project information -----------------------------------------------------
 
-project = 'block2'
-copyright = '2020-2024, Huanchen Zhai'
-author = 'Huanchen Zhai'
+project = 'WalshPulseSeq_Protocol'
+copyright = '2024, Jessica John Britto'
+author = 'Jessica John Britto'
 
 
 # -- General configuration ---------------------------------------------------
@@ -37,8 +38,8 @@ extensions = [
     'sphinx_rtd_theme',
 ]
 
-breathe_projects = {"block2": "../build/doxygenxml/"}
-breathe_default_project = "block2"
+breathe_projects = {"WalshPulseSeq": "../build/doxygenxml/"}
+breathe_default_project = "WalshPulseSeq"
 breathe_domain_by_extension = {"hpp": "cpp"}
 
 # Add any paths that contain templates here, relative to this directory.
@@ -61,8 +62,8 @@ html_theme = 'sphinx_rtd_theme'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-html_theme_options = { 'logo_only': True, }
-html_logo = '_static/block2-logo-white.png'
+# html_theme_options = { 'logo_only': True, }
+# html_logo = '_static/block2-logo-white.png'
 
 primary_domain = "cpp"
 highlight_language = "cpp"
