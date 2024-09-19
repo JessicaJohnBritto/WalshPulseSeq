@@ -24,7 +24,7 @@ Homepage = "https://github.com/JessicaJohnBritto/WalshPulseSeq/tree/main"
 Issues = "https://github.com/JessicaJohnBritto/WalshPulseSeq/issues"
 
 [tool.setuptools.dynamic]
-dependencies = {file = ["requirements_for_pip.txt"]}
+dependencies = {file = ["requirementsWPS.txt"]}
 
 [tool.setuptools-git-versioning]
 enabled = true
