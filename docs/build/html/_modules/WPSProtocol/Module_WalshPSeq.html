@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="English">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WPSProtocol.Module_WalshPSeq &mdash; WalshPulseSeqProtocol</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=9a92d024"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            WalshPulSeqProtocol
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">WPSProtocol</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">WalshPulSeqProtocol</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">WPSProtocol.Module_WalshPSeq</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for WPSProtocol.Module_WalshPSeq</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Thu Jun  6 11:48:00 2024</span>
+
+<span class="sd">Module for Generating Walsh Pulse Sequence </span>
+<span class="sd">for Dynamical Decoupling in Long-range interactions</span>
+
+<span class="sd">@author: Jessica</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># import numpy as np</span>
+<span class="c1"># from numpy import linalg</span>
+<span class="c1"># from scipy import linalg as splinalg</span>
+<span class="c1"># import matplotlib.pyplot as plt</span>
+<span class="c1"># from scipy import sparse as sp</span>
+<span class="c1"># import scipy.sparse.linalg</span>
+<span class="c1"># from functools import reduce</span>
+<span class="c1"># import itertools</span>
+<span class="c1"># from scipy import linalg</span>
+<span class="c1"># from scipy.linalg import expm</span>
+
+<span class="c1"># Z = np.array([[1, 0], [0, -1]])</span>
+<span class="c1"># X = np.array([[0, 1], [1, 0]])</span>
+<span class="c1"># Y = np.array([[0, -1j], [1j, 0]])</span>
+<span class="c1"># I = np.array([[1, 0], [0, 1]])</span>
+<span class="c1"># H = np.array([[1, 1], [1, -1]])</span>
+
+
+<div class="viewcode-block" id="WF_Conditions"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Module_WalshPSeq.WF_Conditions">[docs]</a><span class="k">def</span> <span class="nf">WF_Conditions</span><span class="p">(</span><span class="n">tupleprdt</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    *args: tupleprdt is a list of tuple of </span>
+<span class="sd">    signs of wxi and wyi. </span>
+<span class="sd">    Returns: tupleprdt - a list of Pauli Ops</span>
+<span class="sd">    depending on eq 8 from the paper</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tprdt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tupleprdt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tprdt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">tprdt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">tupleprdt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">I</span>
+        <span class="k">elif</span> <span class="n">tprdt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="n">tprdt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">tupleprdt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="k">elif</span> <span class="o">-</span><span class="n">tprdt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">tprdt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">tupleprdt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y</span>
+        <span class="k">elif</span> <span class="n">tprdt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">tprdt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">tupleprdt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span>
+    <span class="k">return</span> <span class="n">tupleprdt</span>   </div>
+
+<div class="viewcode-block" id="WF_Generate"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Module_WalshPSeq.WF_Generate">[docs]</a><span class="k">def</span> <span class="nf">WF_Generate</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **kwargs: W_x, W_y: Required - list of one element </span>
+<span class="sd">    consisting the index of x, y part of one</span>
+<span class="sd">    qubit. q: Optional - gives the number of times H has</span>
+<span class="sd">    to tensor product with itself. Useful to form WF based</span>
+<span class="sd">    on the highest index of decoupling lists of Wx, Wy.</span>
+<span class="sd">    Returns: lstPaulOp - a list of Pauli Ops</span>
+<span class="sd">    based on the W.I associated with that qubit.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wx</span><span class="p">,</span> <span class="n">wy</span><span class="p">,</span> <span class="n">lst</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">signTuple</span><span class="p">,</span> <span class="n">lstPaulOp</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;wx&#39;</span><span class="p">],</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;wy&#39;</span><span class="p">],</span> <span class="p">[],</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">H0</span><span class="p">,</span> <span class="n">H1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">H</span>
+    <span class="k">if</span> <span class="s1">&#39;q&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">wx</span><span class="p">,</span> <span class="n">wy</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">q</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">H0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">H1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">lst</span> <span class="o">+=</span> <span class="p">[</span><span class="n">H1</span><span class="p">]</span>
+    <span class="n">Hf</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+    <span class="n">wfx</span><span class="p">,</span> <span class="n">wfy</span> <span class="o">=</span> <span class="n">Hf</span><span class="p">[</span><span class="n">wx</span><span class="p">],</span> <span class="n">Hf</span><span class="p">[</span><span class="n">wy</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">wfx_k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">wfx</span><span class="p">):</span>
+        <span class="n">signTuple</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">wfx_k</span><span class="p">,</span> <span class="n">wfy</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>
+    <span class="n">lstPaulOp</span> <span class="o">=</span> <span class="n">WF_Conditions</span><span class="p">(</span><span class="n">signTuple</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lstPaulOp</span></div>
+
+<div class="viewcode-block" id="WF_WIList"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Module_WalshPSeq.WF_WIList">[docs]</a><span class="k">def</span> <span class="nf">WF_WIList</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **kwargs: Wx, Wy - list consisting the </span>
+<span class="sd">    index of x, y part of each qubit.</span>
+<span class="sd">    Returns: Pseq - Pulse sequence.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Wx</span><span class="p">,</span> <span class="n">Wy</span><span class="p">,</span> <span class="n">lstPaulOp</span><span class="p">,</span> <span class="n">Pseq</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;Wx&#39;</span><span class="p">],</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;Wy&#39;</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">Wx</span><span class="p">,</span> <span class="n">Wy</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">wx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Wx</span><span class="p">):</span>
+        <span class="n">lstPaulOp</span> <span class="o">+=</span> <span class="p">[</span><span class="n">WF_Generate</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wx</span> <span class="o">=</span> <span class="n">wx</span><span class="p">,</span> <span class="n">wy</span> <span class="o">=</span> <span class="n">Wy</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="p">)]</span>
+    <span class="n">padded_lstPaulOp</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">itertools</span><span class="o">.</span><span class="n">zip_longest</span><span class="p">(</span><span class="o">*</span><span class="n">lstPaulOp</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="n">I</span><span class="p">)))</span>
+    <span class="n">pseq_k</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">padded_lstPaulOp</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ps_k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pseq_k</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">paulop</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">padded_lstPaulOp</span><span class="p">):</span>
+            <span class="n">pseq_k</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">paulop</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ps_k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pseq_k</span><span class="p">):</span>
+        <span class="n">Pseq</span> <span class="o">+=</span> <span class="p">[</span><span class="n">reduce</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">,</span> <span class="n">ps_k</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">Pseq</span></div>
+
+
+<div class="viewcode-block" id="WPSresource_Hamiltonian_TimeEvolOp_IsingType"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Module_WalshPSeq.WPSresource_Hamiltonian_TimeEvolOp_IsingType">[docs]</a><span class="k">def</span> <span class="nf">WPSresource_Hamiltonian_TimeEvolOp_IsingType</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns: Resource Hamiltonian (Hr) and </span>
+<span class="sd">    its time evolution for τ time.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">opH</span><span class="p">,</span> <span class="n">unitary_timeOp</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;opH&#39;</span><span class="p">],</span> <span class="mi">0</span>
+    <span class="n">H_r</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">),</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span>
+    <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">opH</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">op</span>
+                <span class="n">lst</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">op</span>
+                <span class="n">H_r</span> <span class="o">+=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span><span class="o">*</span><span class="n">reduce</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="p">),</span> <span class="n">alpha</span><span class="p">))</span>
+                <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">]</span>
+    <span class="n">unitary_timeOp</span> <span class="o">=</span> <span class="n">expm</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">tau</span><span class="o">*</span><span class="n">H_r</span><span class="o">/</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">H_r</span><span class="p">,</span> <span class="n">unitary_timeOp</span></div>
+
+<div class="viewcode-block" id="WPSeq_TimeEvolOp"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Module_WalshPSeq.WPSeq_TimeEvolOp">[docs]</a><span class="k">def</span> <span class="nf">WPSeq_TimeEvolOp</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    To input any Hamiltonian other than XY, use &#39;Hr&#39; in kwargs.</span>
+<span class="sd">    **kwargs: Hr Optional</span>
+<span class="sd">    Returns: Unitary time evolution operator as per eq1</span>
+<span class="sd">    and time interval based on τ step.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Pseq</span><span class="p">,</span> <span class="n">unitary_timeOp</span><span class="p">,</span> <span class="n">timeOpPHrP</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;pulses&#39;</span><span class="p">],</span> <span class="p">[],</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="s1">&#39;Hr&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">Hr</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;Hr&#39;</span><span class="p">]</span>
+        <span class="n">expHr</span> <span class="o">=</span> <span class="n">expm</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">Hr</span><span class="o">/</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Hr</span><span class="p">,</span> <span class="n">expHr</span> <span class="o">=</span> <span class="n">WPSresource_Hamiltonian_TimeEvolOp_IsingType</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Pseq</span><span class="p">):</span>
+        <span class="n">timeOpPHrP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">@</span> <span class="n">expHr</span> <span class="o">@</span> <span class="n">p</span> <span class="o">@</span> <span class="n">timeOpPHrP</span>
+    <span class="n">t_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">])</span>
+    <span class="n">unitary_timeOp</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">timeOpPHrP</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t_list</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">unitary_timeOp</span><span class="p">,</span> <span class="n">t_list</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Jessica John Britto.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

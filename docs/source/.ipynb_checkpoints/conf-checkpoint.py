@@ -13,11 +13,17 @@
 import os
 import sys
 from pathlib import Path
-sys.path.insert(0, os.path.abspath('../src/WPSProtocol'))
+# sys.path.insert(0, os.path.abspath('../src/WPSProtocol'))
 
 # parent = Path(conf.py).parent
 # sys.paths = Path(confy.py).parents[1]
 
+# try:
+#   import WPSProtocol
+# except ImportError:
+#   print("oh no 1")
+
+sys.path.insert(0, os.path.abspath(os.path.join("..", "..", "src"))) # Works on local systems
 
 
 

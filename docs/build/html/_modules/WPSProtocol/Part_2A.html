@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="English">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WPSProtocol.Part_2A &mdash; WalshPulseSeqProtocol</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=9a92d024"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            WalshPulSeqProtocol
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">WPSProtocol</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">WalshPulSeqProtocol</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">WPSProtocol.Part_2A</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for WPSProtocol.Part_2A</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># coding: utf-8</span>
+
+<span class="c1">#from InitialFunctions import *</span>
+
+<span class="c1"># import numpy as np</span>
+<span class="c1"># from numpy import linalg</span>
+<span class="c1"># from scipy import linalg as splinalg</span>
+<span class="c1"># import matplotlib.pyplot as plt</span>
+<span class="c1"># from scipy import sparse as sp</span>
+<span class="c1"># import scipy.sparse.linalg</span>
+<span class="c1"># from functools import reduce</span>
+<span class="c1"># import itertools</span>
+<span class="c1"># from scipy import linalg</span>
+<span class="c1"># from scipy.linalg import expm</span>
+
+
+<span class="c1"># Pauli Matrices</span>
+<span class="c1"># sigmaZ = sp.csc_matrix([[1, 0], [0, -1]])</span>
+<span class="c1"># sigmaX = sp.csc_matrix([[0, 1], [1, 0]])</span>
+<span class="c1"># sigmaY = sp.csc_matrix([[0, -1j], [1j, 0]])</span>
+<span class="c1"># sigmaI = sp.csc_matrix([[1, 0], [0, 1]])</span>
+<span class="c1"># sigmaH = sp.csc_matrix([[1, 1], [1, -1]])</span>
+
+<span class="c1"># Z = np.array([[1, 0], [0, -1]])</span>
+<span class="c1"># X = np.array([[0, 1], [1, 0]])</span>
+<span class="c1"># Y = np.array([[0, -1j], [1j, 0]])</span>
+<span class="c1"># I = np.array([[1, 0], [0, 1]])</span>
+
+<span class="c1"># H = np.array([[1, 1], [1, -1]])</span>
+
+<span class="c1"># params = {</span>
+<span class="c1"># &#39;N&#39; : 1,</span>
+<span class="c1"># &#39;tau_list&#39;:[1, 0.5, 0.1, 0.05],</span>
+<span class="c1"># &#39;tau&#39;: 0.1,</span>
+<span class="c1"># &#39;n&#39;: 2,</span>
+<span class="c1"># &#39;alpha&#39;: 1,</span>
+<span class="c1"># &#39;T&#39;: 10,</span>
+<span class="c1"># &#39;R&#39;:[],</span>
+<span class="c1"># &#39;r&#39;:[],</span>
+<span class="c1"># &#39;psi_nm&#39;:[],</span>
+<span class="c1"># &#39;opH&#39;: [X, Y], # Need to change this specific to Model</span>
+<span class="c1"># &#39;pulses&#39;: [I, Z] # Need to change this specific to Model</span>
+<span class="c1"># }</span>
+
+<div class="viewcode-block" id="normalizeWF"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.normalizeWF">[docs]</a><span class="k">def</span> <span class="nf">normalizeWF</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns a normalized wavefunction.</span>
+<span class="sd">    Args: psi - a column vector.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">psi</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">))</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">NWF</span> <span class="o">=</span> <span class="n">psi</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">NWF</span> <span class="o">=</span> <span class="n">psi</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">psi</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">NWF</span></div>
+
+<div class="viewcode-block" id="sparseMatrices"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.sparseMatrices">[docs]</a><span class="k">def</span> <span class="nf">sparseMatrices</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Generates sparse matrices for a given dense matrix.</span>
+<span class="sd">    Args: a - a 2D numpy array</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">csc_matrix</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+      
+<div class="viewcode-block" id="tensorOperators"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.tensorOperators">[docs]</a><span class="k">def</span> <span class="nf">tensorOperators</span><span class="p">(</span><span class="n">matrix2D</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns tensor product of an operator acting on specific qubits  on the system.</span>
+<span class="sd">    Args: matrix2D - a 2X2 dim numpy array.</span>
+<span class="sd">    kwargs: a - no. of sites to the left of the matrix2D,</span>
+<span class="sd">    b - no.of sites to the right of the matrix2D.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">,</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]),</span> <span class="n">matrix2D</span> <span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])))</span></div>
+
+<div class="viewcode-block" id="initialVals"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.initialVals">[docs]</a><span class="k">def</span> <span class="nf">initialVals</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Initializes initial_wavefunction and it&#39;s normalized form based on number of qubits.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">    n: length of the pulse sequence,</span>
+<span class="sd">    N: total number of qubits,</span>
+<span class="sd">    r: coupling constants generated randomly for N qubits,</span>
+<span class="sd">    op: params[&#39;opH&#39;],</span>
+<span class="sd">    pulses: params[&#39;pulses&#39;],</span>
+<span class="sd">    psi_nmn: normalized initial wavefunction randomly generated from Gaussian Distribution,</span>
+<span class="sd">    R: inverse of r,</span>
+<span class="sd">    alpha: extent to which the qubits can interact,</span>
+<span class="sd">    Args: params: dictionary</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span>
+    <span class="n">op</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;opH&#39;</span><span class="p">]</span>
+    <span class="n">pulses</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;pulses&#39;</span><span class="p">]</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">))</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+    <span class="c1"># r = np.random.random_sample(size = 2**N)</span>
+    <span class="n">psi0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">psi_nm</span> <span class="o">=</span> <span class="n">normalizeWF</span><span class="p">(</span><span class="n">psi0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">psi_nm</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">alpha</span></div>
+
+<span class="c1"># n, N, r, op, pulses, psi_nm, R, alpha = initialVals(params)</span>
+<span class="c1"># print(R)</span>
+
+
+<div class="viewcode-block" id="TogglingFrameH"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.TogglingFrameH">[docs]</a><span class="k">def</span> <span class="nf">TogglingFrameH</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns list of Toggling Frame Hamiltonians of (X+Y) Hamiltonian for the complete pulse sequence.</span>
+<span class="sd">    Args: params (dictionary)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">TFH</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">],</span> <span class="p">[]</span>
+    <span class="n">Hk</span><span class="p">,</span> <span class="n">matrx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">pulses</span><span class="p">,</span> <span class="n">opH</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;pulses&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;opH&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pulses</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">opH</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+                <span class="n">matrx</span> <span class="o">=</span> <span class="n">sparseMatrices</span><span class="p">(</span><span class="n">p</span><span class="nd">@op</span><span class="o">@</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+                <span class="n">Hk</span> <span class="o">+=</span> <span class="n">tensorOperators</span><span class="p">(</span><span class="n">matrx</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">TFH</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Hk</span><span class="p">)</span>
+        <span class="n">Hk</span><span class="p">,</span> <span class="n">matrx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">TFH</span></div>
+
+<span class="c1"># TFH = TogglingFrameH(params)</span>
+
+<div class="viewcode-block" id="TimeEvolOpForTFH"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.TimeEvolOpForTFH">[docs]</a><span class="k">def</span> <span class="nf">TimeEvolOpForTFH</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns time evolution operator of </span>
+<span class="sd">    Args: params (dictionary)</span>
+<span class="sd">    kwargs: TFH (list of Toggling frame hamiltonian) </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">TFH</span><span class="p">,</span> <span class="n">unitary_timeOp</span><span class="p">,</span> <span class="n">expTFH</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;TFH&#39;</span><span class="p">],</span> <span class="p">[],</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]),</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">TFH</span><span class="p">):</span>
+        <span class="n">expTFH</span> <span class="o">=</span> <span class="n">expm</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">tau</span><span class="o">*</span><span class="n">hk</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">@</span> <span class="n">expTFH</span>
+    <span class="n">t_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+    <span class="n">unitary_timeOp</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">expTFH</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t_list</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">unitary_timeOp</span><span class="p">,</span> <span class="n">t_list</span></div>
+<span class="c1"># unitary_timeOp, t_list = TimeEvolOpForTFH(params, TFH = TogglingFrameH(params))</span>
+
+
+<div class="viewcode-block" id="H_noise"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.H_noise">[docs]</a><span class="k">def</span> <span class="nf">H_noise</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Generates (S) type Hamiltonian for N number of qubits.</span>
+<span class="sd">    &#39;S&#39; can be X, Y, Z.</span>
+<span class="sd">    For eg: (X+Y) Hamiltonian, params[&#39;opH&#39;] = [X, Y].</span>
+<span class="sd">    (X+Y+Z) Hamiltonian, params[&#39;opH&#39;] = [X, Y, Z].</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>
+    <span class="n">op</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;opH&#39;</span><span class="p">]</span>
+    <span class="n">Hnoise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">Hnoise</span> <span class="o">+=</span> <span class="n">tensorOperators</span><span class="p">(</span><span class="n">sparseMatrices</span><span class="p">(</span><span class="n">op</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">a</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Hnoise</span></div>
+<span class="c1"># print(H_noise(params))    </span>
+
+<div class="viewcode-block" id="utimeOpH"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.utimeOpH">[docs]</a><span class="k">def</span> <span class="nf">utimeOpH</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns list of time evolution of the Hamiltonian for discrete time steps, and list of time_steps.</span>
+<span class="sd">    kwargs: H [Required] Hamiltonian.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">]</span>
+    <span class="n">t_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">])</span>
+    <span class="n">unitary_timeOp</span> <span class="o">=</span> <span class="p">[</span><span class="n">expm</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">H</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_list</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">unitary_timeOp</span><span class="p">,</span> <span class="n">t_list</span></div>
+
+<div class="viewcode-block" id="avgHFromTogglingFrameH"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.avgHFromTogglingFrameH">[docs]</a><span class="k">def</span> <span class="nf">avgHFromTogglingFrameH</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns Average Hamiltonian given a list of Toggling Frame Hamiltonians.</span>
+<span class="sd">    Args: params (dictionary)</span>
+<span class="sd">    kwargs: TFH [Required]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>
+    <span class="n">avgH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">))</span>
+    <span class="n">TFH</span>  <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;TFH&#39;</span><span class="p">]</span>
+    <span class="n">avgH</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">TFH</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">TFH</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">avgH</span></div>
+<span class="c1"># print(avgHFromTogglingFrameH(params))</span>
+
+<span class="c1"># def TimeEvolOpForTFH(params, **kwargs):</span>
+<span class="c1">#     TFH, unitary_timeOp, expTFH, tau, n, T = kwargs[&#39;TFH&#39;], [], np.eye(2**params[&#39;N&#39;]), params[&#39;tau&#39;], params[&#39;n&#39;], params[&#39;T&#39;]</span>
+<span class="c1">#     for i, hk in enumerate(TFH):</span>
+<span class="c1">#         expTFH = expm(-1j*tau*hk/n) @ expTFH</span>
+<span class="c1">#     t_list = np.arange(0, 10, tau)</span>
+<span class="c1">#     unitary_timeOp = [np.linalg.matrix_power(expTFH, i) for i, t in enumerate(t_list)]</span>
+<span class="c1">#     return unitary_timeOp, t_list</span>
+<span class="c1"># # unitary_timeOp, t_list = TimeEvolOpForTFH(params, TFH = TogglingFrameH(params))</span>
+    
+<span class="c1"># def F_tvals(params, **kwargs):</span>
+<span class="c1">#     H, Utop_present = kwargs[&#39;H&#39;], kwargs[&#39;Utop_present&#39;]</span>
+<span class="c1">#     H_present = kwargs[&#39;H_present&#39;]</span>
+<span class="c1">#     psi_nm = params[&#39;psi_nm&#39;]</span>
+<span class="c1">#     F_t, Ft2, T_list, UToP = [], [], [], []</span>
+<span class="c1">#     for i in params[&#39;tau_list&#39;]:</span>
+<span class="c1">#         params[&#39;tau&#39;] = i</span>
+<span class="c1">#         if H_present == &#39;True&#39;:</span>
+<span class="c1">#             unitary_timeOp, t_list = utimeOpH(params, H = H)</span>
+<span class="c1">#         elif Utop_present == &#39;True&#39;:</span>
+<span class="c1">#             unitary_timeOp, t_list = TimeEvolOpForTFH(params, H = H)</span>
+<span class="c1">#         UToP.append(unitary_timeOp)</span>
+<span class="c1">#         T_list.append(t_list)</span>
+<span class="c1">#         psi_t = [normalizeWF(np.matmul(unitary_timeOp[i],psi_nm)) for i in range(len(unitary_timeOp))]</span>
+<span class="c1">#         F_t.append([np.power(np.vdot(psi_nm, pt), 2) for pt in psi_t])</span>
+<span class="c1"># #         Ft2 = [1-f for i in range(len(F_t)) for f in F_t[i]]</span>
+<span class="c1"># #         t_list = [(i**2)*j**2 for j in t_list]</span>
+<span class="c1"># #         plt.figure(figsize=[7,5])</span>
+<span class="c1"># #         plt.plot( t_list, Ft2, label = f&quot;N={params[&#39;N&#39;]}, τ={params[&#39;tau&#39;]}&quot;)</span>
+<span class="c1"># #         plt.xlabel(&quot;$\mathregular{(τT)^2}$&quot;)</span>
+<span class="c1"># #         plt.ylabel(&quot;$\mathregular{(1 - F)}$&quot;)</span>
+<span class="c1"># #         plt.grid(&#39;on&#39;)</span>
+<span class="c1"># #         plt.legend()</span>
+<span class="c1">#         Ft2 = []</span>
+<span class="c1">#     plt.show()</span>
+<span class="c1">#     return unitary_timeOp, psi_t, F_t, Ft2, T_list, UToP</span>
+
+<span class="c1"># def plottingFidelityVsTaus(params, **kwargs):</span>
+<span class="c1">#     Utop_present = kwargs[&#39;Utop_present&#39;]</span>
+<span class="c1">#     H_present = kwargs[&#39;H_present&#39;]</span>
+<span class="c1">#     unitary_timeOp, psi_t, F_t, Ft2, T_list, UToP = F_tvals(params, H = H, H_present = H_present, Utop_present = Utop_present)</span>
+<span class="c1">#     plt.figure(figsize=[7,5])</span>
+<span class="c1">#     plt.xlabel(&quot;Time&quot;)</span>
+<span class="c1">#     plt.ylabel(&quot;Fidelity&quot;)</span>
+<span class="c1">#     plt.title(&quot;Mitigating the noise with Pulse Sequences different τ&quot;)</span>
+<span class="c1">#     plt.grid(&#39;on&#39;)</span>
+<span class="c1">#     for i in range(len(F_t)):</span>
+<span class="c1">#         plt.plot( T_list[i], F_t[i], label = f&quot;N={params[&#39;N&#39;]}, τ={params[&#39;tau_list&#39;][i]}&quot;)</span>
+<span class="c1">#         plt.legend()</span>
+<span class="c1">#     plt.show()</span>
+<span class="c1">#     pass</span>
+
+<span class="c1"># # params[&#39;opH&#39;] = [X, Y, Z]</span>
+<span class="c1"># # params[&#39;pulses&#39;] = [I, X, Y, Z]</span>
+<span class="c1"># # params[&#39;n&#39;] = 4</span>
+<span class="c1"># # H = avgHFromTogglingFrameH(params, TFH = TogglingFrameH(params))</span>
+<span class="c1"># # plottingFidelityVsTaus(params, H = H, H_present = &#39;True&#39;, Utop_present = &#39;False&#39;)</span>
+<span class="c1"># # print(utimeOp(params, H = H, H_present = &#39;True&#39;, Utop_present = &#39;False&#39;))</span>
+<span class="c1"># # print(H)</span>
+
+<span class="c1"># # plottingFidelityVsTaus(params, H = H, H_present = &#39;False&#39;, Utop_present = &#39;True&#39;)</span>
+<span class="c1"># # print(TFHutimeOp(params, H = H, H_present = &#39;True&#39;, Utop_present = &#39;False&#39;))</span>
+<span class="c1"># # print(H)</span>
+
+<span class="c1"># # params[&#39;N&#39;] = 5</span>
+<span class="c1"># # params[&#39;opH&#39;] = [X]</span>
+<span class="c1"># # params[&#39;pulses&#39;] = [I, Z]</span>
+<span class="c1"># # params[&#39;n&#39;] = 2</span>
+<span class="c1"># # n, N, r, op, pulses, psi_nm, R, alpha = initialVals(params)</span>
+<div class="viewcode-block" id="TogglingFrame_Ising"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.Part_2A.TogglingFrame_Ising">[docs]</a><span class="k">def</span> <span class="nf">TogglingFrame_Ising</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns toggling frame hamiltonian of the Ising Model.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">N</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span>
+    <span class="n">TFH</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pulses</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;pulses&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pulses</span><span class="p">:</span>
+        <span class="n">Hk</span><span class="p">,</span> <span class="n">matrx1</span><span class="p">,</span> <span class="n">matrx2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> 
+        <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;opH&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">matrx1</span> <span class="o">=</span> <span class="n">sparseMatrices</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+                <span class="n">matrx2</span> <span class="o">=</span> <span class="n">sparseMatrices</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">N</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">matrx1</span> <span class="o">=</span> <span class="n">sparseMatrices</span><span class="p">(</span><span class="n">p</span><span class="nd">@op</span><span class="o">@</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+                    <span class="k">elif</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">!=</span><span class="mi">0</span><span class="p">):</span>
+                        <span class="n">matrx2</span> <span class="o">=</span> <span class="n">sparseMatrices</span><span class="p">(</span><span class="n">p</span><span class="nd">@op</span><span class="o">@</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+                <span class="k">elif</span> <span class="n">N</span><span class="o">%</span><span class="mi">2</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">matrx2</span> <span class="o">=</span> <span class="n">sparseMatrices</span><span class="p">(</span><span class="n">p</span><span class="nd">@op</span><span class="o">@</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+                    <span class="k">elif</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">!=</span><span class="mi">0</span><span class="p">):</span>
+                        <span class="n">matrx1</span> <span class="o">=</span> <span class="n">sparseMatrices</span><span class="p">(</span><span class="n">p</span><span class="nd">@op</span><span class="o">@</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span>
+                <span class="n">Hk</span> <span class="o">+=</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">reduce</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">,</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">),</span> <span class="n">matrx1</span><span class="p">,</span> <span class="n">matrx2</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">i</span><span class="p">))))</span>
+        <span class="n">TFH</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Hk</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">TFH</span></div>
+<span class="c1"># print(TogglingFrame_Ising(params))</span>
+
+<span class="c1"># # H = avgHFromTogglingFrameH(params, TFH = TogglingFrame_Ising(params))</span>
+<span class="c1"># # plottingFidelityVsTaus(params, H = H, H_present = &#39;True&#39;, Utop_present = &#39;False&#39;)</span>
+
+<span class="c1"># # H = utopFromTFH(params, TFH = TogglingFrame_Ising(params))</span>
+<span class="c1"># # plottingFidelityVsTaus(params, H = H, H_present = &#39;False&#39;, Utop_present = &#39;True&#39;)</span>
+
+
+<span class="c1"># # Using Walsh Indices</span>
+
+<span class="c1"># # Generates WI and stores as a col vector in dictionary corresponding to the site [key]</span>
+<span class="c1"># def WalshIndicesGenerate(params, **kwargs):</span>
+<span class="c1">#     N = params[&#39;N&#39;]</span>
+<span class="c1">#     n = params[&#39;n&#39;]</span>
+<span class="c1">#     qbit_wi = {}</span>
+<span class="c1">#     for i in range(N):</span>
+<span class="c1">#         qbit_wi[i] = np.full(n, i)</span>
+<span class="c1">#     return qbit_wi</span>
+<span class="c1"># # print(WalshIndicesGenerate(params))</span>
+<span class="c1"># # qbit_wi = WalshIndicesGenerate(params)</span>
+
+<span class="c1"># ### Functions below are useful to construct the avg. H from WI</span>
+
+<span class="c1"># # Generates WI to decouple within a given cutoff</span>
+<span class="c1"># def WI_Decouple_cutoff(params, **kwargs):</span>
+<span class="c1">#     N, n, cutoff_dist = params[&#39;N&#39;], params[&#39;n&#39;], kwargs[&#39;cutoff_dist&#39;]</span>
+<span class="c1">#     WIR_x, WIR_y, wirx, wiry = [], [], [], []</span>
+<span class="c1">#     for i in range(0, N, 1):</span>
+<span class="c1">#         if i%cutoff_dist &lt;= cutoff_dist-1: </span>
+<span class="c1">#             wirx.append(i%(cutoff_dist))</span>
+<span class="c1">#             wiry.append(i%(cutoff_dist))</span>
+<span class="c1">#             if i%(cutoff_dist)+1 == cutoff_dist:</span>
+<span class="c1">#                 WIR_x.append(wirx)</span>
+<span class="c1">#                 WIR_y.append(wiry)</span>
+<span class="c1">#                 wirx, wiry = [], []</span>
+<span class="c1">#     return (WIR_x, WIR_y)</span>
+
+<span class="c1"># # print(WI_Decouple_cutoff(params, cutoff_dist = 3))</span>
+<span class="c1"># # WIR = WI_Decouple_cutoff(params, cutoff_dist = 3)</span>
+
+<span class="c1"># # Generates the terms in H for WI with cutoff</span>
+<span class="c1"># def HamiltonianTermFromWI_cutoff(params, **kwargs):</span>
+<span class="c1">#     N, matrx, WIR = params[&#39;N&#39;], kwargs[&#39;matrx&#39;], kwargs[&#39;WIR&#39;]</span>
+<span class="c1">#     lst, Lfinal = [I]*N, []</span>
+<span class="c1">#     for wir in WIR:</span>
+<span class="c1">#         for j in range(len(wir)):</span>
+<span class="c1">#             for k in range(j+1, len(wir), 1):</span>
+<span class="c1">#                 if wir[k]==wir[j] and k!=j:</span>
+<span class="c1">#                     lst[k] = matrx</span>
+<span class="c1">#                     lst[j] = matrx</span>
+<span class="c1">#                     Lfinal.append(lst)</span>
+<span class="c1">#                     lst = [I]*N                   </span>
+<span class="c1">#     return Lfinal</span>
+<span class="c1"># # print(HamiltonianTermFromWI_cutoff(params, cutoff_dist = 4, matrx = X, WIR = [[0, 0, 2, 0], [0, 1, 0]]))</span>
+
+<span class="c1"># # This function gives the final H given a walsh_seq with a cutoff dist. </span>
+<span class="c1"># def WI_HamiltonianFinal(params, **kwargs):</span>
+<span class="c1">#     N = params[&#39;N&#39;]</span>
+<span class="c1">#     H, cutoff_dist, matrxs, lst = np.zeros((2**N, 2**N)), kwargs[&#39;cutoff_dist&#39;], kwargs[&#39;matrxs&#39;], []</span>
+<span class="c1">#     WIR = WI_Decouple_cutoff(params, cutoff_dist = cutoff_dist)</span>
+<span class="c1">#     for matrx in matrxs:</span>
+<span class="c1">#         for w in WIR:</span>
+<span class="c1">#             lst = HamiltonianTermFromWI_cutoff(params, cutoff_dist = cutoff_dist, matrx = matrx, WIR = w)</span>
+<span class="c1">#             for l in lst:</span>
+<span class="c1">#                 H += reduce(sp.kron, l)      </span>
+<span class="c1">#     return H</span>
+<span class="c1"># # print(WI_HamiltonianFinal(params, cutoff_dist = 3, matrxs = [X, Y]))</span>
+<span class="c1"># # WI_Sequence(params, WIR = WI_Decouple_cutoff(params, cutoff_dist = 3))</span>
+
+
+<span class="c1"># def WF_Conditions(tupleprdt, **kwargs): # tupleprdt is a list</span>
+<span class="c1">#     for i, tprdt in enumerate(tupleprdt):</span>
+<span class="c1">#         if tprdt[0] == tprdt[1] == 1:</span>
+<span class="c1">#             tupleprdt[i] = I</span>
+<span class="c1">#         elif tprdt[0] == -tprdt[1] == 1:</span>
+<span class="c1">#             tupleprdt[i] = X</span>
+<span class="c1">#         elif -tprdt[0] == tprdt[1] == 1:</span>
+<span class="c1">#             tupleprdt[i] = Y</span>
+<span class="c1">#         elif tprdt[0] == tprdt[1] == -1:</span>
+<span class="c1">#             tupleprdt[i] = Z</span>
+<span class="c1">#     return tupleprdt   </span>
+<span class="c1"># # print(WF_Conditions(tupleprdt = [(1,1), (1,-1)]))</span>
+
+<span class="c1"># def WF_Generate(params, **kwargs):</span>
+<span class="c1">#     N, lst, W_x, W_y, tupleprdt = params[&#39;N&#39;], [H], kwargs[&#39;W_x&#39;], kwargs[&#39;W_y&#39;], []</span>
+<span class="c1">#     power = max(W_x, W_y)</span>
+<span class="c1">#     lst = lst*power</span>
+<span class="c1">#     Hf = reduce(np.kron, lst)</span>
+<span class="c1">#     w_x, w_y = Hf[W_x], Hf[W_y]</span>
+<span class="c1">#     for i, h in enumerate(w_x):</span>
+<span class="c1">#         tupleprdt.append((h, w_y[i]))</span>
+<span class="c1">#     tupleprdt = WF_Conditions(tupleprdt)</span>
+<span class="c1">#     return tupleprdt</span>
+<span class="c1"># # print(WF_Generate(params, W_x = 1, W_y = 2))</span>
+    
+<span class="c1"># def WF_WIList(params, **kwargs):</span>
+<span class="c1">#     W_x, W_y, tupleprdt, ps = kwargs[&#39;W_x&#39;], kwargs[&#39;W_y&#39;], [], [[]]</span>
+<span class="c1">#     for i, w_x in enumerate(W_x):</span>
+<span class="c1">#         tupleprdt.append(WF_Generate(params, W_x = w_x, W_y = W_y[i]))</span>
+<span class="c1">#     ps = [[] for _ in range(len(max(tupleprdt,key=len)))]</span>
+<span class="c1">#     padded_tupleprdt = list(zip(*itertools.zip_longest(*tupleprdt, fillvalue=I)))</span>
+<span class="c1">#     for i, p in enumerate(ps):</span>
+<span class="c1">#         for j, padded_ps in enumerate(padded_tupleprdt):</span>
+<span class="c1">#             ps[i].append(padded_ps[i])</span>
+<span class="c1">#     return ps</span>
+<span class="c1"># # print(WF_WIList(params, W_x = [1, 1, 1], W_y = [2, 1, 1]))</span>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Jessica John Britto.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

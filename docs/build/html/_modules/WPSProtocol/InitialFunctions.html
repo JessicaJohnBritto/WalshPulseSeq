@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="English">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WPSProtocol.InitialFunctions &mdash; WalshPulseSeqProtocol</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=9a92d024"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            WalshPulSeqProtocol
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">WPSProtocol</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">WalshPulSeqProtocol</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">WPSProtocol.InitialFunctions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for WPSProtocol.InitialFunctions</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon Jun  3 16:27:28 2024</span>
+
+<span class="sd">@author: Jessica</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># import numpy as np</span>
+<span class="c1"># from numpy import linalg</span>
+<span class="c1"># from scipy import linalg as splinalg</span>
+<span class="c1"># import matplotlib.pyplot as plt</span>
+<span class="c1"># from scipy import sparse as sp</span>
+<span class="c1"># import scipy.sparse.linalg</span>
+<span class="c1"># from functools import reduce</span>
+<span class="c1"># import itertools</span>
+<span class="c1"># from scipy import linalg</span>
+<span class="c1"># from scipy.linalg import expm</span>
+
+<span class="c1"># # Pauli Matrices</span>
+<span class="c1"># sigmaZ = sp.csc_matrix([[1, 0], [0, -1]])</span>
+<span class="c1"># sigmaX = sp.csc_matrix([[0, 1], [1, 0]])</span>
+<span class="c1"># sigmaY = sp.csc_matrix([[0, -1j], [1j, 0]])</span>
+<span class="c1"># sigmaI = sp.csc_matrix([[1, 0], [0, 1]])</span>
+<span class="c1"># sigmaH = sp.csc_matrix([[1, 1], [1, -1]])</span>
+
+<span class="c1"># Z = np.array([[1, 0], [0, -1]])</span>
+<span class="c1"># X = np.array([[0, 1], [1, 0]])</span>
+<span class="c1"># Y = np.array([[0, -1j], [1j, 0]])</span>
+<span class="c1"># I = np.array([[1, 0], [0, 1]])</span>
+
+<span class="c1"># H = np.array([[1, 1], [1, -1]])</span>
+
+<div class="viewcode-block" id="normalizeWF"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.InitialFunctions.normalizeWF">[docs]</a><span class="k">def</span> <span class="nf">normalizeWF</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns a normalized wavefunction.</span>
+<span class="sd">    Args: psi - a column vector.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">psi</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">))</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">NWF</span> <span class="o">=</span> <span class="n">psi</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">NWF</span> <span class="o">=</span> <span class="n">psi</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">psi</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">NWF</span></div>
+
+<div class="viewcode-block" id="sparseMatrices"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.InitialFunctions.sparseMatrices">[docs]</a><span class="k">def</span> <span class="nf">sparseMatrices</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Generates sparse matrices for a given dense matrix.</span>
+<span class="sd">    Args: a - a 2D numpy array</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">csc_matrix</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+      
+<div class="viewcode-block" id="tensorOperators"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.InitialFunctions.tensorOperators">[docs]</a><span class="k">def</span> <span class="nf">tensorOperators</span><span class="p">(</span><span class="n">matrix2D</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns tensor product of an operator acting on specific qubits  on the system.</span>
+<span class="sd">    Args: matrix2D - a 2X2 dim numpy array.</span>
+<span class="sd">    kwargs: a - no. of sites to the left of the matrix2D,</span>
+<span class="sd">    b - no.of sites to the right of the matrix2D.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">,</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]),</span> <span class="n">matrix2D</span> <span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])))</span></div>
+
+<div class="viewcode-block" id="initialVals"><a class="viewcode-back" href="../../api/WPSProtocol.html#WPSProtocol.InitialFunctions.initialVals">[docs]</a><span class="k">def</span> <span class="nf">initialVals</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Initializes initial_wavefunction and it&#39;s normalized form based on number of qubits.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">    n: length of the pulse sequence,</span>
+<span class="sd">    N: total number of qubits,</span>
+<span class="sd">    r: coupling constants generated randomly for N qubits,</span>
+<span class="sd">    op: params[&#39;opH&#39;],</span>
+<span class="sd">    pulses: params[&#39;pulses&#39;],</span>
+<span class="sd">    psi_nmn: normalized initial wavefunction randomly generated from Gaussian Distribution,</span>
+<span class="sd">    R: inverse of r,</span>
+<span class="sd">    alpha: extent to which the qubits can interact,</span>
+<span class="sd">    Args: params: dictionary</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span>
+    <span class="n">op</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;opH&#39;</span><span class="p">]</span>
+    <span class="n">pulses</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;pulses&#39;</span><span class="p">]</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">))</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+    <span class="c1"># r = np.random.random_sample(size = 2**N)</span>
+    <span class="n">psi0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">psi_nm</span> <span class="o">=</span> <span class="n">normalizeWF</span><span class="p">(</span><span class="n">psi0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">pulses</span><span class="p">,</span> <span class="n">psi_nm</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">alpha</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Jessica John Britto.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
