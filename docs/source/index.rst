@@ -7,9 +7,6 @@ Welcome to WalshPulSeqProtocol's documentation!
 ===============================================
 
 .. include:: ../README.md
-   :parser: myst_parser.sphinx_
-   :start-after: <!-- index.rst content start -->
-
 
 .. toctree::
    :maxdepth: 2
