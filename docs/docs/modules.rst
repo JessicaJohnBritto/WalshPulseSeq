@@ -1,7 +1,6 @@
-src
-===
+docs
+====
 
 .. toctree::
    :maxdepth: 4
 
-   WPSProtocol
