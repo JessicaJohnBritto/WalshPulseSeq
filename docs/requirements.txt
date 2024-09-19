@@ -4,3 +4,4 @@ numpy
 scipy
 matplotlib
 myst_parser
+m2r2

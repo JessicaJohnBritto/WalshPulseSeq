@@ -6,7 +6,11 @@
 Welcome to WalshPulSeqProtocol's documentation!
 ===============================================
 
-.. include:: ../README.md
+.. toctree::
+    :maxdepth: 2
+    :caption: Homepage:
+
+    readme
 
 .. toctree::
    :maxdepth: 2
