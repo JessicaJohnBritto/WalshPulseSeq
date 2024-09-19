@@ -8,7 +8,7 @@ name = "WPSProtocol"
 readme = "README.md"
 dynamic = ["version", "dependencies"]
 
-requires-python = "==3.8.19"
+requires-python = ">=3.10"
 authors = [
   { name="Jessica John Britto", email="jessicajohnbritto@kgpian.iitkgp.ac.in" },
 ]
@@ -20,11 +20,12 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/JessicaJohnBritto/WalshPulseSeq/tree/main"
+Homepage = "https://walshpulseseq.readthedocs.io/en/latest/readme.html"
+Documentation = "https://walshpulseseq.readthedocs.io/en/latest/api/modules.html"
 Issues = "https://github.com/JessicaJohnBritto/WalshPulseSeq/issues"
 
 [tool.setuptools.dynamic]
-dependencies = {file = ["requirements_for_pip.txt"]}
+dependencies = {file = ["requirementsWPS.txt"]}
 
 [tool.setuptools-git-versioning]
 enabled = true
