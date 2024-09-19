@@ -13,6 +13,12 @@ Welcome to WalshPulSeqProtocol's documentation!
     readme
 
 .. toctree::
+    :maxdepth: 2
+    :caption: Tutorials:
+
+    tutorial
+
+.. toctree::
    :maxdepth: 2
    :caption: API References:
 

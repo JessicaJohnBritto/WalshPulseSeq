@@ -3,5 +3,5 @@ sphinx_rtd_theme
 numpy
 scipy
 matplotlib
-myst_parser
+myst_nb
 m2r2

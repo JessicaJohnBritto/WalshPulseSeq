@@ -52,6 +52,7 @@ release = '1.0.post4'
 extensions = [
     # 'myst_parser',
     'm2r2',
+    "myst_nb",
     'sphinx.ext.todo',            # Support for TODO notes
     # 'sphinx.ext.napoleon',        # Supports Google and NumPy style docstrings
     'sphinx.ext.viewcode',        # Add links to highlighted source code
