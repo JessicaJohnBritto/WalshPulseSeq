@@ -51,7 +51,7 @@ extensions = [
     # 'sphinx.ext.intersphinx',     # Link to other project’s documentation
     # 'sphinx.ext.mathjax',         # For rendering LaTeX-style math
     # 'sphinx.ext.githubpages',
-    "sphinx_wagtail_theme",
+    # "sphinx_wagtail_theme",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
