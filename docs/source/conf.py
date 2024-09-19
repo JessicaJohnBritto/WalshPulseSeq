@@ -63,6 +63,8 @@ extensions = [
     # "sphinx_wagtail_theme",
 ]
 
+jupyter_execute_notebooks = "off" # Jupyter notebook execution using myst_nb
+
 source_suffix = {
     '.rst': 'restructuredtext',
     '.md': 'markdown',
