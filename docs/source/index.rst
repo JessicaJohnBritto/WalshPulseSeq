@@ -16,7 +16,7 @@ Welcome to WalshPulSeqProtocol's documentation!
     :maxdepth: 2
     :caption: Tutorials:
 
-    tutorial
+    ../Tutorial Notebooks/SS+S_NN.ipynb
 
 .. toctree::
    :maxdepth: 2
