@@ -3,5 +3,6 @@ sphinx_rtd_theme
 numpy
 scipy
 matplotlib
+lxml_html_clean
 nbsphinx
 m2r2
