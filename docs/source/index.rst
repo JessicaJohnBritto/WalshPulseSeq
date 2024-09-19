@@ -16,7 +16,8 @@ Welcome to WalshPulSeqProtocol's documentation!
     :maxdepth: 2
     :caption: Tutorials:
 
-    ../../Tutorial Notebooks/SS+S_NN
+    tutorial/Type-1 Nearest Neighbor Interactions and External Fields
+    tutorial/Type-2 Long Range Interactions
 
 .. toctree::
    :maxdepth: 2
