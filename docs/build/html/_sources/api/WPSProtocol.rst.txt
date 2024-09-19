@@ -12,14 +12,6 @@ WPSProtocol.InitialFunctions module
    :undoc-members:
    :show-inheritance:
 
-WPSProtocol.Module\_RotationAngleErrorsDoubleAveraging module
--------------------------------------------------------------
-
-.. automodule:: WPSProtocol.Module_RotationAngleErrorsDoubleAveraging
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 WPSProtocol.Module\_WalshPSeq module
 ------------------------------------
 
@@ -32,14 +24,6 @@ WPSProtocol.Part\_2A module
 ---------------------------
 
 .. automodule:: WPSProtocol.Part_2A
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-WPSProtocol.TestingFile module
-------------------------------
-
-.. automodule:: WPSProtocol.TestingFile
    :members:
    :undoc-members:
    :show-inheritance:
