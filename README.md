@@ -33,9 +33,11 @@ Clone the project
   git clone https://github.com/JessicaJohnBritto/WalshPulseSeq.git
 ```
 - Using ssh
+
 ```bash
   git clone git@github.com:JessicaJohnBritto/WalshPulseSeq.git
 ```
+
 ## Contributing
 
 Follow the steps given in `Run Locally`. 
