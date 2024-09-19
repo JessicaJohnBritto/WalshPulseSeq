@@ -3,5 +3,5 @@ sphinx_rtd_theme
 numpy
 scipy
 matplotlib
-myst_nb
+nbsphinx
 m2r2
