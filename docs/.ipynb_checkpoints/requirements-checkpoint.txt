@@ -1,2 +1,7 @@
 sphinx
 sphinx_rtd_theme
+numpy
+scipy
+matplotlib.pyplot
+functools
+itertools
