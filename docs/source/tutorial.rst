@@ -1,1 +1,1 @@
-.. mdinclude:: ../../Tutorial Notebooks/SS+S_NN.ipynb
+.. mdinclude:: ../Tutorial Notebooks/SS+S_NN.ipynb
