@@ -6,7 +6,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "WPSProtocol"
 readme = "README.md"
-dynamic = ["version", "dependencies"]
+# dynamic = ["version", "dependencies"]
+dynamic = ["version"]
 
 requires-python = ">=3.10"
 authors = [
@@ -19,13 +20,20 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+dependencies = [
+    "numpy>=1.21.0",
+    "matplotlib>=3.4.0",
+    "scipy>=1.7.0"
+]
+
+
 [project.urls]
-Homepage = "https://walshpulseseq.readthedocs.io/en/latest/readme.html"
+Homepage = "https://github.com/JessicaJohnBritto/WalshPulseSeq/tree/main"
 Documentation = "https://walshpulseseq.readthedocs.io/en/latest/api/modules.html"
 Issues = "https://github.com/JessicaJohnBritto/WalshPulseSeq/issues"
 
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirementsWPS.txt"]}
+# [tool.setuptools.dynamic]
+# dependencies = {file = ["requirementsWPS.txt"]}
 
 [tool.setuptools-git-versioning]
 enabled = true
