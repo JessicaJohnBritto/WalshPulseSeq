@@ -58,7 +58,7 @@ extensions = [
     'sphinx.ext.viewcode',        # Add links to highlighted source code
     'sphinx.ext.autodoc',         # Automatically document from docstrings
     # 'sphinx.ext.intersphinx',     # Link to other project’s documentation
-    # 'sphinx.ext.mathjax',         # For rendering LaTeX-style math
+    'sphinx.ext.mathjax',         # For rendering LaTeX-style math
     # 'sphinx.ext.githubpages',
     # "sphinx_wagtail_theme",
 ]
