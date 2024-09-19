@@ -63,7 +63,19 @@
 <li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Module_WalshPSeq.WPSresource_Hamiltonian_TimeEvolOp_IsingType"><code class="docutils literal notranslate"><span class="pre">WPSresource_Hamiltonian_TimeEvolOp_IsingType()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#wpsprotocol-part-2a-module">WPSProtocol.Part_2A module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-WPSProtocol.Part_2A">WPSProtocol.Part_2A module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.H_noise"><code class="docutils literal notranslate"><span class="pre">H_noise()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.TimeEvolOpForTFH"><code class="docutils literal notranslate"><span class="pre">TimeEvolOpForTFH()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.TogglingFrameH"><code class="docutils literal notranslate"><span class="pre">TogglingFrameH()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.TogglingFrame_Ising"><code class="docutils literal notranslate"><span class="pre">TogglingFrame_Ising()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.avgHFromTogglingFrameH"><code class="docutils literal notranslate"><span class="pre">avgHFromTogglingFrameH()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.initialVals"><code class="docutils literal notranslate"><span class="pre">initialVals()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.normalizeWF"><code class="docutils literal notranslate"><span class="pre">normalizeWF()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.sparseMatrices"><code class="docutils literal notranslate"><span class="pre">sparseMatrices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.tensorOperators"><code class="docutils literal notranslate"><span class="pre">tensorOperators()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WPSProtocol.Part_2A.utimeOpH"><code class="docutils literal notranslate"><span class="pre">utimeOpH()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-WPSProtocol">Module contents</a></li>
 </ul>
 </li>
@@ -197,8 +209,92 @@ its time evolution for τ time.</p>
 </dd></dl>
 
 </section>
-<section id="wpsprotocol-part-2a-module">
-<h2>WPSProtocol.Part_2A module<a class="headerlink" href="#wpsprotocol-part-2a-module" title="Permalink to this heading"></a></h2>
+<section id="module-WPSProtocol.Part_2A">
+<span id="wpsprotocol-part-2a-module"></span><h2>WPSProtocol.Part_2A module<a class="headerlink" href="#module-WPSProtocol.Part_2A" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.H_noise">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">H_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#H_noise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.H_noise" title="Permalink to this definition"></a></dt>
+<dd><p>Generates (S) type Hamiltonian for N number of qubits.
+'S' can be X, Y, Z.
+For eg: (X+Y) Hamiltonian, params['opH'] = [X, Y].
+(X+Y+Z) Hamiltonian, params['opH'] = [X, Y, Z].</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.TimeEvolOpForTFH">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">TimeEvolOpForTFH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#TimeEvolOpForTFH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.TimeEvolOpForTFH" title="Permalink to this definition"></a></dt>
+<dd><p>Returns time evolution operator of 
+Args: params (dictionary)
+kwargs: TFH (list of Toggling frame hamiltonian)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.TogglingFrameH">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">TogglingFrameH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#TogglingFrameH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.TogglingFrameH" title="Permalink to this definition"></a></dt>
+<dd><p>Returns list of Toggling Frame Hamiltonians of (X+Y) Hamiltonian for the complete pulse sequence.
+Args: params (dictionary)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.TogglingFrame_Ising">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">TogglingFrame_Ising</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#TogglingFrame_Ising"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.TogglingFrame_Ising" title="Permalink to this definition"></a></dt>
+<dd><p>Returns toggling frame hamiltonian of the Ising Model.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.avgHFromTogglingFrameH">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">avgHFromTogglingFrameH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#avgHFromTogglingFrameH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.avgHFromTogglingFrameH" title="Permalink to this definition"></a></dt>
+<dd><p>Returns Average Hamiltonian given a list of Toggling Frame Hamiltonians.
+Args: params (dictionary)
+kwargs: TFH [Required]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.initialVals">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">initialVals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#initialVals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.initialVals" title="Permalink to this definition"></a></dt>
+<dd><p>Initializes initial_wavefunction and it's normalized form based on number of qubits.
+Returns:
+n: length of the pulse sequence,
+N: total number of qubits,
+r: coupling constants generated randomly for N qubits,
+op: params['opH'],
+pulses: params['pulses'],
+psi_nmn: normalized initial wavefunction randomly generated from Gaussian Distribution,
+R: inverse of r,
+alpha: extent to which the qubits can interact,
+Args: params: dictionary</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.normalizeWF">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">normalizeWF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psi</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#normalizeWF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.normalizeWF" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a normalized wavefunction.
+Args: psi - a column vector.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.sparseMatrices">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">sparseMatrices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#sparseMatrices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.sparseMatrices" title="Permalink to this definition"></a></dt>
+<dd><p>Generates sparse matrices for a given dense matrix.
+Args: a - a 2D numpy array</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.tensorOperators">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">tensorOperators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix2D</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#tensorOperators"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.tensorOperators" title="Permalink to this definition"></a></dt>
+<dd><p>Returns tensor product of an operator acting on specific qubits  on the system.
+Args: matrix2D - a 2X2 dim numpy array.
+kwargs: a - no. of sites to the left of the matrix2D,
+b - no.of sites to the right of the matrix2D.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WPSProtocol.Part_2A.utimeOpH">
+<span class="sig-prename descclassname"><span class="pre">WPSProtocol.Part_2A.</span></span><span class="sig-name descname"><span class="pre">utimeOpH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/WPSProtocol/Part_2A.html#utimeOpH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WPSProtocol.Part_2A.utimeOpH" title="Permalink to this definition"></a></dt>
+<dd><p>Returns list of time evolution of the Hamiltonian for discrete time steps, and list of time_steps.
+kwargs: H [Required] Hamiltonian.</p>
+</dd></dl>
+
 </section>
 <section id="module-WPSProtocol">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-WPSProtocol" title="Permalink to this heading"></a></h2>
