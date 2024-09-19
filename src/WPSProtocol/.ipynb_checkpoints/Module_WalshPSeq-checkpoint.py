@@ -7,22 +7,22 @@ for Dynamical Decoupling in Long-range interactions
 
 @author: Jessica
 """
-# import numpy as np
-# from numpy import linalg
-# from scipy import linalg as splinalg
-# import matplotlib.pyplot as plt
-# from scipy import sparse as sp
-# import scipy.sparse.linalg
-# from functools import reduce
-# import itertools
-# from scipy import linalg
-# from scipy.linalg import expm
+import numpy as np
+from numpy import linalg
+from scipy import linalg as splinalg
+import matplotlib.pyplot as plt
+from scipy import sparse as sp
+import scipy.sparse.linalg
+from functools import reduce
+import itertools
+from scipy import linalg
+from scipy.linalg import expm
 
-# Z = np.array([[1, 0], [0, -1]])
-# X = np.array([[0, 1], [1, 0]])
-# Y = np.array([[0, -1j], [1j, 0]])
-# I = np.array([[1, 0], [0, 1]])
-# H = np.array([[1, 1], [1, -1]])
+Z = np.array([[1, 0], [0, -1]])
+X = np.array([[0, 1], [1, 0]])
+Y = np.array([[0, -1j], [1j, 0]])
+I = np.array([[1, 0], [0, 1]])
+H = np.array([[1, 1], [1, -1]])
 
 
 def WF_Conditions(tupleprdt, **kwargs): 

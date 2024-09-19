@@ -15,7 +15,7 @@ from scipy import linalg
 from scipy.linalg import expm
 
 
-Pauli Matrices
+# Pauli Matrices
 sigmaZ = sp.csc_matrix([[1, 0], [0, -1]])
 sigmaX = sp.csc_matrix([[0, 1], [1, 0]])
 sigmaY = sp.csc_matrix([[0, -1j], [1j, 0]])

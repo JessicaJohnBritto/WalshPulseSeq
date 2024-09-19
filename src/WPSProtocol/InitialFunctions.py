@@ -4,30 +4,30 @@ Created on Mon Jun  3 16:27:28 2024
 
 @author: Jessica
 """
-# import numpy as np
-# from numpy import linalg
-# from scipy import linalg as splinalg
-# import matplotlib.pyplot as plt
-# from scipy import sparse as sp
-# import scipy.sparse.linalg
-# from functools import reduce
-# import itertools
-# from scipy import linalg
-# from scipy.linalg import expm
+import numpy as np
+from numpy import linalg
+from scipy import linalg as splinalg
+import matplotlib.pyplot as plt
+from scipy import sparse as sp
+import scipy.sparse.linalg
+from functools import reduce
+import itertools
+from scipy import linalg
+from scipy.linalg import expm
 
-# # Pauli Matrices
-# sigmaZ = sp.csc_matrix([[1, 0], [0, -1]])
-# sigmaX = sp.csc_matrix([[0, 1], [1, 0]])
-# sigmaY = sp.csc_matrix([[0, -1j], [1j, 0]])
-# sigmaI = sp.csc_matrix([[1, 0], [0, 1]])
-# sigmaH = sp.csc_matrix([[1, 1], [1, -1]])
+# Pauli Matrices
+sigmaZ = sp.csc_matrix([[1, 0], [0, -1]])
+sigmaX = sp.csc_matrix([[0, 1], [1, 0]])
+sigmaY = sp.csc_matrix([[0, -1j], [1j, 0]])
+sigmaI = sp.csc_matrix([[1, 0], [0, 1]])
+sigmaH = sp.csc_matrix([[1, 1], [1, -1]])
 
-# Z = np.array([[1, 0], [0, -1]])
-# X = np.array([[0, 1], [1, 0]])
-# Y = np.array([[0, -1j], [1j, 0]])
-# I = np.array([[1, 0], [0, 1]])
+Z = np.array([[1, 0], [0, -1]])
+X = np.array([[0, 1], [1, 0]])
+Y = np.array([[0, -1j], [1j, 0]])
+I = np.array([[1, 0], [0, 1]])
 
-# H = np.array([[1, 1], [1, -1]])
+H = np.array([[1, 1], [1, -1]])
 
 def normalizeWF(psi,**kwargs):
     '''
