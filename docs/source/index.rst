@@ -1,3 +1,7 @@
+.. meta::
+    :description lang=en:
+        Dynamical Decoupling Protocol uses Walsh Functions to generate (Walsh) Pulse Sequences for selective interactions in Qubits.
+
 .. WalshPulSeqProtocol documentation master file, created by
    sphinx-quickstart on Wed Sep 18 17:13:44 2024.
    You can adapt this file completely to your liking, but it should at least
