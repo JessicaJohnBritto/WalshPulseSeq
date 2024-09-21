@@ -7,6 +7,9 @@ WPSProtocol _(WPS == Walsh Pulse Sequence)_ makes use of Walsh Functions to gene
 
 WPSProtocol contains codes for implementing the protocol described in this paper _Votto, M., Zeiher, J., & Vermersch, B. (2023). Robust universal quantum processors in spin systems via Walsh pulse sequences. arXiv preprint arXiv:2311.10600._
 
+## Theory
+The theory behind this protocol can be found at [WalshPulseSeqProtocol:A python package for Dynamical Decoupling of Spin Systems using Walsh Functions](https://drive.google.com/file/d/1KWIZfiM3YbbgYqnDeojgH0q4sAX7M3V1/view?usp=sharing).
+
 ## Installation
 
 Create a virtual environment
