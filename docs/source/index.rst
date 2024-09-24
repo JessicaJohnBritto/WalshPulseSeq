@@ -1,6 +1,8 @@
 .. meta::
     :description lang=en:
         Dynamical Decoupling Protocol uses Walsh Functions to generate (Walsh) Pulse Sequences for selective interactions in Qubits.
+        This protocol is based on the work by Votto, M., Zeiher, J., & Vermersch, B. (2023). Robust universal quantum processors in spin systems via Walsh pulse sequences. arXiv preprint     
+        arXiv:2311.10600.
 
 .. WalshPulSeqProtocol documentation master file, created by
    sphinx-quickstart on Wed Sep 18 17:13:44 2024.
